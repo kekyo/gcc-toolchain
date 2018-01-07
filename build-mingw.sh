@@ -27,22 +27,22 @@ mkdir -p artifacts
 cd artifacts
 
 if [ ! -f ${AUTOCONF}.tar.bz2 ] ; then
-    wget http://ftp.gnu.org/gnu/autoconf/${AUTOCONF}.tar.bz2
-fi
-if [ ! -f ${NEWLIB}.tar.gz ] ; then
-    wget ftp://sourceware.org/pub/newlib/${NEWLIB}.tar.gz
+    wget http://ftpmirror.gnu.org/autoconf/${AUTOCONF}.tar.bz2
 fi
 if [ ! -f ${BINUTILS}.tar.bz2 ] ; then
-    wget ftp://sourceware.org/pub/binutils/snapshots/${BINUTILS}.tar.bz2
+    wget http://ftpmirror.gnu.org/binutils/${BINUTILS}.tar.bz2
 fi
 if [ ! -f ${GCC}.tar.gz ] ; then
-    wget ftp://ftp.gnu.org/gnu/gcc/${GCC}/${GCC}.tar.gz
+    wget http://ftpmirror.gnu.org/gcc/${GCC}/${GCC}.tar.gz
+fi
+if [ ! -f ${GDB}.tar.gz ] ; then
+    wget http://ftpmirror.gnu.org/gdb/${GDB}.tar.gz
 fi
 if [ ! -f ${EXPAT}.tar.bz2 ] ; then
     wget https://github.com/libexpat/libexpat/releases/download/R_${EXPAT_VERSION//\./_}/${EXPAT}.tar.bz2
 fi
-if [ ! -f ${GDB}.tar.gz ] ; then
-    wget http://ftp.gnu.org/gnu/gdb/${GDB}.tar.gz
+if [ ! -f ${NEWLIB}.tar.gz ] ; then
+    wget http://sourceware.org/pub/newlib/${NEWLIB}.tar.gz
 fi
 
 cd ..
