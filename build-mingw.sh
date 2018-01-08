@@ -16,10 +16,6 @@ EXPAT=${EXPAT:-expat-${EXPAT_VERSION}}
 NPROC=${NPROC:-$((`nproc`*2))}
 PARALLEL=${PARALLEL:--j${NPROC}}
 
-PATH=/gcc-bootstrap/bin:/gcc-toolchain/bin:$PATH;export PATH
-LD_LIBRARY_PATH=/gcc-toolchain/lib:$LD_LIBRARY_PATH;export LD_LIBRARY_PATH
-LD_RUN_PATH=/gcc-toolchain/lib:$LD_RUN_PATH;export LD_RUN_PATH
-
 echo "# ==============================================================="
 echo "# download"
 
@@ -206,10 +202,10 @@ cd ..
 cd ..
 
 echo "# ==============================================================="
-echo "# binutils (bootstrap1)"
+echo "# binutils (bootstrap)"
 
 cd binutils*
-autoconf
+/gcc-bootstrap/bin/autoconf
 
 rm -rf build-bootstrap
 mkdir -p build-bootstrap
@@ -218,11 +214,9 @@ cd build-bootstrap
     --disable-nls \
     --disable-werror \
     --disable-shared \
-    --enable-gold \
     --enable-lto \
     --enable-multilib \
     --enable-interwork \
-    --enable-vtable-verify \
     --with-isl=/gcc-bootstrap
 make ${PARALLEL}
 make install
@@ -250,7 +244,7 @@ cd build-bootstrap
     --with-mpfr=/gcc-bootstrap \
     --with-mpc=/gcc-bootstrap \
     --with-isl=/gcc-bootstrap \
-    --oldincludedir=/usr \
+    --with-native-system-header-dir=/usr/include \
     --enable-languages=c
 make ${PARALLEL}
 make install
@@ -260,6 +254,10 @@ cd ..
 
 # ==========================================================================
 # cross builds
+
+PATH=/gcc-bootstrap/bin:$PATH;export PATH
+LD_LIBRARY_PATH=/gcc-bootstrap/lib:$LD_LIBRARY_PATH;export LD_LIBRARY_PATH
+LD_RUN_PATH=/gcc-bootstrap/lib:$LD_RUN_PATH;export LD_RUN_PATH
 
 echo "# ==============================================================="
 echo "# binutils (for ${BUILD} --> ${TARGET})"
@@ -320,6 +318,10 @@ make ${PARALLEL} check
 cd ..
 
 cd ..
+
+PATH=/gcc-toolchain/bin:$PATH;export PATH
+LD_LIBRARY_PATH=/gcc-toolchain/lib:$LD_LIBRARY_PATH;export LD_LIBRARY_PATH
+LD_RUN_PATH=/gcc-toolchain/lib:$LD_RUN_PATH;export LD_RUN_PATH
 
 echo "# ==============================================================="
 echo "# newlib (for ${BUILD} --> ${TARGET})"
