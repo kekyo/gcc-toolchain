@@ -201,57 +201,6 @@ cd ..
 
 cd ..
 
-echo "# ==============================================================="
-echo "# binutils (bootstrap)"
-
-cd binutils*
-/gcc-bootstrap/bin/autoconf
-
-rm -rf build-bootstrap
-mkdir -p build-bootstrap
-cd build-bootstrap
-../configure --prefix=/gcc-bootstrap \
-    --disable-nls \
-    --disable-werror \
-    --disable-shared \
-    --enable-lto \
-    --enable-multilib \
-    --enable-interwork \
-    --with-isl=/gcc-bootstrap
-make ${PARALLEL}
-make install
-cd ..
-
-cd ..
-
-echo "# ==============================================================="
-echo "# gcc (bootstrap)"
-
-cd gcc*
-
-rm -rf build-bootstrap
-mkdir -p build-bootstrap
-cd build-bootstrap
-../configure --prefix=/gcc-bootstrap \
-    --disable-nls \
-    --disable-werror \
-    --disable-shared \
-    --disable-libssp \
-    --enable-lto \
-    --enable-multilib \
-    --enable-interwork \
-    --with-gmp=/gcc-bootstrap \
-    --with-mpfr=/gcc-bootstrap \
-    --with-mpc=/gcc-bootstrap \
-    --with-isl=/gcc-bootstrap \
-    --with-native-system-header-dir=/usr/include \
-    --enable-languages=c
-make ${PARALLEL}
-make install
-cd ..
-
-cd ..
-
 # ==========================================================================
 # cross builds
 
@@ -377,7 +326,6 @@ cd build-${TARGET}-2
     --enable-languages=c,c++
 make ${PARALLEL}
 make install
-make ${PARALLEL} check
 cd ..
 
 cd ..
@@ -411,7 +359,6 @@ cd build-${TARGET}
     --with-isl=/gcc-bootstrap
 make ${PARALLEL}
 make install
-make ${PARALLEL} check
 cd ..
 
 cd ..
