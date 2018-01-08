@@ -364,7 +364,7 @@ cd ..
 echo "# ==============================================================="
 echo "# collect"
 
-COLLECT=`pwd`/../artifacts/${GCC}-toolchain_${BUILD}_${TARGET}.tar.bz2
+COLLECT=`pwd`/../artifacts/${GCC}-toolchain_${BUILD}_${TARGET}_`date --iso-8601`.tar.bz2
 pushd /
 tar -jcvf ${COLLECT} gcc-toolchain
 popd
