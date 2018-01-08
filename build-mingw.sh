@@ -263,7 +263,6 @@ cd build-${TARGET}-1
     --enable-languages=c
 make ${PARALLEL}
 make install
-make ${PARALLEL} check
 cd ..
 
 cd ..
@@ -292,7 +291,6 @@ cd build-${TARGET}
     --enable-vtable-verify
 make ${PARALLEL}
 make install
-make ${PARALLEL} check
 cd ..
 
 cd ..
