@@ -243,8 +243,6 @@ cd build-bootstrap
     --disable-werror \
     --disable-shared \
     --disable-libssp \
-    --disable-libvtv \
-    --disable-libquadmath \
     --enable-lto \
     --enable-multilib \
     --enable-interwork \
@@ -252,6 +250,7 @@ cd build-bootstrap
     --with-mpfr=/gcc-bootstrap \
     --with-mpc=/gcc-bootstrap \
     --with-isl=/gcc-bootstrap \
+    --oldincludedir=/usr \
     --enable-languages=c
 make ${PARALLEL}
 make install
@@ -294,9 +293,9 @@ echo "# gcc (only C for ${BUILD} --> ${TARGET})"
 
 cd gcc*
 
-rm -rf build-${TARGET}1
-mkdir -p build-${TARGET}1
-cd build-${TARGET}1
+rm -rf build-${TARGET}-1
+mkdir -p build-${TARGET}-1
+cd build-${TARGET}-1
 ../configure --prefix=/gcc-toolchain \
     --target=${TARGET} \
     --disable-nls \
@@ -352,9 +351,9 @@ echo "# gcc (for ${BUILD} --> ${TARGET})"
 
 cd gcc*
 
-rm -rf build-${TARGET}2
-mkdir -p build-${TARGET}2
-cd build-${TARGET}2
+rm -rf build-${TARGET}-2
+mkdir -p build-${TARGET}-2
+cd build-${TARGET}-2
 ../configure --prefix=/gcc-toolchain \
     --target=${TARGET} \
     --disable-nls \
