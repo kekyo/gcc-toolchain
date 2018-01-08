@@ -201,7 +201,6 @@ cd build-bootstrap
     --disable-shared
 make ${PARALLEL}
 make install
-make ${PARALLEL} check
 cd ..
 
 cd ..
