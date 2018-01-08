@@ -106,7 +106,7 @@ echo "# autoconf"
 cd autoconf*
 
 rm -rf build
-mkdir build
+mkdir -p build
 cd build
 ../configure --prefix=/gcc-bootstrap
 make ${PARALLEL}
@@ -124,7 +124,7 @@ cd binutils*
 autoconf
 
 rm -rf build-bootstrap1
-mkdir build-bootstrap1
+mkdir -p build-bootstrap1
 cd build-bootstrap1
 ../configure --prefix=/gcc-bootstrap \
     --disable-nls \
@@ -149,7 +149,7 @@ echo "# gcc (bootstrap1)"
 cd gcc*
 
 rm -rf build-bootstrap1
-mkdir build1-bootstrap1
+mkdir -p build1-bootstrap1
 cd build1-bootstrap1
 ../configure --prefix=/gcc-bootstrap \
     --disable-nls \
@@ -178,7 +178,7 @@ echo "# newlib (bootstrap)"
 cd newlib*
 
 rm -rf build
-mkdir build
+mkdir -p build
 cd build
 ../configure --prefix=/gcc-bootstrap \
     --disable-nls \
@@ -202,7 +202,7 @@ echo "# gmp (bootstrap)"
 cd gmp*
 
 rm -rf build
-mkdir build
+mkdir -p build
 cd build
 ../configure --prefix=/gcc-bootstrap \
     --disable-shared
@@ -219,7 +219,7 @@ echo "# mpfr (bootstrap)"
 cd mpfr*
 
 rm -rf build
-mkdir build
+mkdir -p build
 cd build
 ../configure --prefix=/gcc-bootstrap \
     --disable-shared \
@@ -237,7 +237,7 @@ echo "# mpc (bootstrap)"
 cd mpc*
 
 rm -rf build
-mkdir build
+mkdir -p build
 cd build
 ../configure --prefix=/gcc-bootstrap \
     --disable-shared \
@@ -256,7 +256,7 @@ echo "# isl (bootstrap)"
 cd isl*
 
 rm -rf build
-mkdir build
+mkdir -p build
 cd build
 ../configure --prefix=/gcc-bootstrap \
     --disable-shared \
@@ -274,7 +274,7 @@ echo "# expat (bootstrap)"
 cd expat*
 
 rm -rf build
-mkdir build
+mkdir -p build
 cd build
 ../configure --prefix=/gcc-toolchain \
     --disable-shared
@@ -291,7 +291,7 @@ echo "# binutils (bootstrap2)"
 cd binutils*
 
 rm -rf build-bootstrap2
-mkdir build-bootstrap2
+mkdir -p build-bootstrap2
 cd build-bootstrap2
 ../configure --prefix=/gcc-bootstrap \
     --disable-nls \
@@ -317,7 +317,7 @@ echo "# gcc (bootstrap2)"
 cd gcc*
 
 rm -rf build-bootstrap2
-mkdir build1-bootstrap2
+mkdir -p build1-bootstrap2
 cd build1-bootstrap2
 ../configure --prefix=/gcc-bootstrap \
     --disable-nls \
@@ -351,7 +351,7 @@ echo "# binutils (for ${BUILD} --> ${TARGET})"
 cd binutils*
 
 rm -rf build-${TARGET}
-mkdir build-${TARGET}
+mkdir -p build-${TARGET}
 cd build-${TARGET}
 ../configure --prefix=/gcc-toolchain \
     --target=${TARGET} \
@@ -378,7 +378,7 @@ echo "# gcc (only C for ${BUILD} --> ${TARGET})"
 cd gcc*
 
 rm -rf build-${TARGET}1
-mkdir build-${TARGET}1
+mkdir -p build-${TARGET}1
 cd build-${TARGET}1
 ../configure --prefix=/gcc-toolchain \
     --target=${TARGET} \
@@ -410,7 +410,7 @@ echo "# newlib (for ${BUILD} --> ${TARGET})"
 cd newlib*
 
 rm -rf build-${TARGET}
-mkdir build-${TARGET}
+mkdir -p build-${TARGET}
 cd build-${TARGET}
 ../configure --prefix=/gcc-toolchain \
     --target=${TARGET} \
@@ -435,7 +435,7 @@ echo "# gcc (for ${BUILD} --> ${TARGET})"
 cd gcc*
 
 rm -rf build-${TARGET}2
-mkdir build-${TARGET}2
+mkdir -p build-${TARGET}2
 cd build-${TARGET}2
 ../configure --prefix=/gcc-toolchain \
     --target=${TARGET} \
@@ -468,7 +468,7 @@ echo "# gdb (for ${BUILD} --> ${TARGET})"
 cd gdb*
 
 rm -rf build-${TARGET}
-mkdir build-${TARGET}
+mkdir -p build-${TARGET}
 cd build-${TARGET}
 ../configure --prefix=/gcc-toolchain \
     --target=${TARGET} \
