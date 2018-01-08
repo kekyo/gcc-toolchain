@@ -10,12 +10,19 @@
 ### MSYS2
 
 * You have to choose "final-result of target toolchain (gcc.exe, ld.exe ...) arch" for 64bit or 32bit.
-  * 64bit: Open MinGW 64bit console.
-  * 32bit: Open MinGW 32bit console.
+
+#### 64bit: Open MinGW 64bit console and execute below:
 
 ```
 pacman -Syuu
-pacman -S bzip2 base-devel gcc gmp mpfr mpc isl mingw-w64-`arch`-toolchain
+pacman -S bzip2 base-devel mingw-w64-x86_64-toolchain gmp mpfr mpc isl
+```
+
+#### 32bit: Open MinGW 32bit console and execute below:
+
+```
+pacman -Syuu
+pacman -S bzip2 base-devel mingw-w64-i686-toolchain gmp mpfr mpc isl
 ```
 
 ### Build gcc toolchains
