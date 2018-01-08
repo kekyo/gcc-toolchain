@@ -15,14 +15,14 @@
 
 ```
 pacman -Syuu
-pacman -S bzip2 base-devel mingw-w64-x86_64-toolchain gmp mpfr mpc isl
+pacman -S bzip2 base-devel mingw-w64-x86_64-toolchain
 ```
 
 #### 32bit: Open MinGW 32bit console and execute below:
 
 ```
 pacman -Syuu
-pacman -S bzip2 base-devel mingw-w64-i686-toolchain gmp mpfr mpc isl
+pacman -S bzip2 base-devel mingw-w64-i686-toolchain
 ```
 
 ### Build gcc toolchains
@@ -30,6 +30,15 @@ pacman -S bzip2 base-devel mingw-w64-i686-toolchain gmp mpfr mpc isl
 * And execute `build-mingw.sh`
   * Default target configuration is "arm-none-eabi"
   * Build for binutils, gcc, newlib (with reentrant) and gdb.
+
+#### Note:
+
+* When received error executing at 'configure autoconf':
+
+`C:/msys64/usr/bin/gawk.exe: error while loading shared libraries: msys-readline7.dll: cannot open shared object file: No such file or directory`
+
+* You have to copy (or link) the '/usr/bin/msys-readline6.dll' to '/usr/bin/msys-readline7.dll'.
+  * MSYS's bug? (Cause at 2018.01.08)
 
 ## License
 
