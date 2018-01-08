@@ -15,7 +15,7 @@
 
 ```
 pacman -Syuu
-pacman -S bzip2 base-devel mingw-w64-`arch`-toolchain
+pacman -S bzip2 base-devel gmp mpfr mpc isl mingw-w64-`arch`-toolchain
 ```
 
 ### Build gcc toolchains

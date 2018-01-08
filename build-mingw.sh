@@ -118,92 +118,13 @@ cd ..
 cd ..
 
 echo "# ==============================================================="
-echo "# binutils (bootstrap1)"
-
-cd binutils*
-autoconf
-
-rm -rf build-bootstrap1
-mkdir -p build-bootstrap1
-cd build-bootstrap1
-../configure --prefix=/gcc-bootstrap \
-    --disable-nls \
-    --disable-werror \
-    --disable-shared \
-    --enable-gold \
-    --enable-lto \
-    --enable-multilib \
-    --enable-interwork \
-    --enable-vtable-verify \
-    --with-newlib \
-    --with-isl
-make ${PARALLEL}
-make install
-cd ..
-
-cd ..
-
-echo "# ==============================================================="
-echo "# gcc (bootstrap1)"
-
-cd gcc*
-
-rm -rf build-bootstrap1
-mkdir -p build1-bootstrap1
-cd build1-bootstrap1
-../configure --prefix=/gcc-bootstrap \
-    --disable-nls \
-    --disable-werror \
-    --disable-shared \
-    --disable-libssp \
-    --disable-libquadmath \
-    --enable-lto \
-    --enable-multilib \
-    --enable-interwork \
-    --with-newlib \
-    --with-gmp \
-    --with-mpfr \
-    --with-mpc \
-    --with-isl \
-    --enable-languages=c
-make ${PARALLEL}
-make install
-cd ..
-
-cd ..
-
-echo "# ==============================================================="
-echo "# newlib (bootstrap)"
-
-cd newlib*
-
-rm -rf build
-mkdir -p build
-cd build
-../configure --prefix=/gcc-bootstrap \
-    --disable-nls \
-    --disable-werror \
-    --disable-shared \
-    --disable-libssp \
-    --enable-lto \
-    --enable-multilib \
-    --enable-interwork \
-    --enable-vtable-verify
-make ${PARALLEL}
-make install
-make ${PARALLEL} check
-cd ..
-
-cd ..
-
-echo "# ==============================================================="
 echo "# gmp (bootstrap)"
 
 cd gmp*
 
-rm -rf build
-mkdir -p build
-cd build
+rm -rf build-bootstrap
+mkdir -p build-bootstrap
+cd build-bootstrap
 ../configure --prefix=/gcc-bootstrap \
     --disable-shared
 make ${PARALLEL}
@@ -218,9 +139,9 @@ echo "# mpfr (bootstrap)"
 
 cd mpfr*
 
-rm -rf build
-mkdir -p build
-cd build
+rm -rf build-bootstrap
+mkdir -p build-bootstrap
+cd build-bootstrap
 ../configure --prefix=/gcc-bootstrap \
     --disable-shared \
     --with-gmp=/gcc-bootstrap
@@ -236,9 +157,9 @@ echo "# mpc (bootstrap)"
 
 cd mpc*
 
-rm -rf build
-mkdir -p build
-cd build
+rm -rf build-bootstrap
+mkdir -p build-bootstrap
+cd build-bootstrap
 ../configure --prefix=/gcc-bootstrap \
     --disable-shared \
     --with-gmp=/gcc-bootstrap \
@@ -255,9 +176,9 @@ echo "# isl (bootstrap)"
 
 cd isl*
 
-rm -rf build
-mkdir -p build
-cd build
+rm -rf build-bootstrap
+mkdir -p build-bootstrap
+cd build-bootstrap
 ../configure --prefix=/gcc-bootstrap \
     --disable-shared \
     --with-gmp-prefix=/gcc-bootstrap
@@ -273,10 +194,10 @@ echo "# expat (bootstrap)"
 
 cd expat*
 
-rm -rf build
-mkdir -p build
-cd build
-../configure --prefix=/gcc-toolchain \
+rm -rf build-bootstrap
+mkdir -p build-bootstrap
+cd build-bootstrap
+../configure --prefix=/gcc-bootstrap \
     --disable-shared
 make ${PARALLEL}
 make install
@@ -286,13 +207,14 @@ cd ..
 cd ..
 
 echo "# ==============================================================="
-echo "# binutils (bootstrap2)"
+echo "# binutils (bootstrap1)"
 
 cd binutils*
+autoconf
 
-rm -rf build-bootstrap2
-mkdir -p build-bootstrap2
-cd build-bootstrap2
+rm -rf build-bootstrap
+mkdir -p build-bootstrap
+cd build-bootstrap
 ../configure --prefix=/gcc-bootstrap \
     --disable-nls \
     --disable-werror \
@@ -302,42 +224,38 @@ cd build-bootstrap2
     --enable-multilib \
     --enable-interwork \
     --enable-vtable-verify \
-    --with-newlib \
-    --with-isl
+    --with-isl=/gcc-bootstrap
 make ${PARALLEL}
 make install
-make ${PARALLEL} check
 cd ..
 
 cd ..
 
 echo "# ==============================================================="
-echo "# gcc (bootstrap2)"
+echo "# gcc (bootstrap)"
 
 cd gcc*
 
-rm -rf build-bootstrap2
-mkdir -p build1-bootstrap2
-cd build1-bootstrap2
+rm -rf build-bootstrap
+mkdir -p build-bootstrap
+cd build-bootstrap
 ../configure --prefix=/gcc-bootstrap \
     --disable-nls \
     --disable-werror \
     --disable-shared \
     --disable-libssp \
+    --disable-libvtv \
     --disable-libquadmath \
     --enable-lto \
     --enable-multilib \
     --enable-interwork \
-    --with-newlib \
-    --with-gmp \
-    --with-mpfr \
-    --with-mpc \
-    --with-isl \
-    --with-headers=../../${NEWLIB}/newlib/libc/include \
+    --with-gmp=/gcc-bootstrap \
+    --with-mpfr=/gcc-bootstrap \
+    --with-mpc=/gcc-bootstrap \
+    --with-isl=/gcc-bootstrap \
     --enable-languages=c
 make ${PARALLEL}
 make install
-make ${PARALLEL} check
 cd ..
 
 cd ..
@@ -364,7 +282,7 @@ cd build-${TARGET}
     --enable-interwork \
     --enable-vtable-verify \
     --with-newlib \
-    --with-isl=/gcc-toolchain
+    --with-isl=/gcc-bootstrap
 make ${PARALLEL}
 make install
 make ${PARALLEL} check
@@ -386,15 +304,16 @@ cd build-${TARGET}1
     --disable-werror \
     --disable-shared \
     --disable-libssp \
+    --disable-libvtv \
     --disable-libquadmath \
     --enable-lto \
     --enable-multilib \
     --enable-interwork \
     --with-newlib \
-    --with-gmp=/gcc-toolchain \
-    --with-mpfr=/gcc-toolchain \
-    --with-mpc=/gcc-toolchain \
-    --with-isl=/gcc-toolchain \
+    --with-gmp=/gcc-bootstrap \
+    --with-mpfr=/gcc-bootstrap \
+    --with-mpc=/gcc-bootstrap \
+    --with-isl=/gcc-bootstrap \
     --with-headers=../../${NEWLIB}/newlib/libc/include \
     --enable-languages=c
 make ${PARALLEL}
@@ -443,16 +362,17 @@ cd build-${TARGET}2
     --disable-werror \
     --disable-shared \
     --disable-libssp \
+    --disable-libvtv \
     --enable-gold \
     --enable-lto \
     --enable-multilib \
     --enable-interwork \
     --enable-vtable-verify \
     --with-newlib \
-    --with-gmp=/gcc-toolchain \
-    --with-mpfr=/gcc-toolchain \
-    --with-mpc=/gcc-toolchain \
-    --with-isl=/gcc-toolchain \
+    --with-gmp=/gcc-bootstrap \
+    --with-mpfr=/gcc-bootstrap \
+    --with-mpc=/gcc-bootstrap \
+    --with-isl=/gcc-bootstrap \
     --with-headers=../../${NEWLIB}/newlib/libc/include \
     --enable-languages=c,c++
 make ${PARALLEL}
@@ -476,18 +396,19 @@ cd build-${TARGET}
     --disable-werror \
     --disable-shared \
     --disable-libssp \
+    --disable-libvtv \
     --enable-gold \
     --enable-lto \
     --enable-multilib \
     --enable-interwork \
     --enable-vtable-verify \
     --enable-expat \
-    --with-expat \
+    --with-expat=/gcc-bootstrap \
     --with-newlib \
-    --with-gmp=/gcc-toolchain \
-    --with-mpfr=/gcc-toolchain \
-    --with-mpc=/gcc-toolchain \
-    --with-isl=/gcc-toolchain
+    --with-gmp=/gcc-bootstrap \
+    --with-mpfr=/gcc-bootstrap \
+    --with-mpc=/gcc-bootstrap \
+    --with-isl=/gcc-bootstrap
 make ${PARALLEL}
 make install
 make ${PARALLEL} check
