@@ -10,6 +10,7 @@
 ### Install and setup MSYS2
 
 * You have to choose "final-result of target toolchain (gcc.exe, ld.exe ...) arch" for 64bit or 32bit.
+* Be careful: You have to choose "MinGW console" instead "MSYS2 console".
 
 #### 64bit: Open MinGW 64bit console and execute below:
 
