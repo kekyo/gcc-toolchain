@@ -39,7 +39,7 @@ mkdir -p ${BUILD_TARGET_PATH}
 echo "# ==============================================================="
 echo "# binutils (for ${BUILD} --> ${TARGET})"
 
-pushd binutils*
+pushd ${BINUTILS}
 
 rm -rf build-${BUILD_TARGET}
 mkdir -p build-${BUILD_TARGET}
@@ -65,7 +65,7 @@ popd
 echo "# ==============================================================="
 echo "# gcc (only C for ${BUILD} --> ${TARGET})"
 
-pushd gcc*
+pushd ${GCC}
 
 rm -rf build-${BUILD_TARGET}-1
 mkdir -p build-${BUILD_TARGET}-1
@@ -94,7 +94,7 @@ popd
 echo "# ==============================================================="
 echo "# newlib (for ${BUILD} --> ${TARGET})"
 
-pushd newlib*
+pushd ${NEWLIB}
 
 rm -rf build-${BUILD_TARGET}
 mkdir -p build-${BUILD_TARGET}
@@ -117,7 +117,7 @@ popd
 echo "# ==============================================================="
 echo "# gcc (for ${BUILD} --> ${TARGET})"
 
-pushd gcc*
+pushd ${GCC}
 
 rm -rf build-${BUILD_TARGET}-2
 mkdir -p build-${BUILD_TARGET}-2
@@ -148,7 +148,7 @@ popd
 echo "# ==============================================================="
 echo "# gdb (for ${BUILD} --> ${TARGET})"
 
-pushd gdb*
+pushd ${GDB}
 
 rm -rf build-${BUILD_TARGET}
 mkdir -p build-${BUILD_TARGET}

@@ -111,7 +111,7 @@ pushd stage
 echo "# ==============================================================="
 echo "# autoconf"
 
-pushd autoconf*
+pushd ${AUTOCONF}
 
 rm -rf build
 mkdir -p build
@@ -121,6 +121,13 @@ make ${PARALLEL}
 make install
 # Autoconf's test too long
 #make ${PARALLEL} check
+
+popd
+
+pushd ${BINUTILS}
+
+# binutils contains unstable configure script, so we have to regenerate by autoconf.
+${BOOTSTRAP_PATH}/bin/autoconf
 
 popd
 
