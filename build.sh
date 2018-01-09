@@ -44,7 +44,7 @@ pushd ${BINUTILS}
 rm -rf build-${BUILD_TARGET}
 mkdir -p build-${BUILD_TARGET}
 cd build-${BUILD_TARGET}
-../configure --prefix=/gcc-toolchain \
+../configure --prefix=${BUILD_TARGET_PATH} \
     --target=${TARGET} \
     --disable-nls \
     --disable-werror \
@@ -57,7 +57,7 @@ cd build-${BUILD_TARGET}
     --with-newlib \
     --with-isl=${BOOTSTRAP_PATH}
 make ${PARALLEL}
-make install DESTDIR=${BUILD_TARGET_PATH}
+make install
 make ${PARALLEL} check
 
 popd
@@ -70,7 +70,7 @@ pushd ${GCC}
 rm -rf build-${BUILD_TARGET}-1
 mkdir -p build-${BUILD_TARGET}-1
 cd build-${BUILD_TARGET}-1
-../configure --prefix=/gcc-toolchain \
+../configure --prefix=${BUILD_TARGET_PATH} \
     --target=${TARGET} \
     --disable-nls \
     --disable-werror \
@@ -87,7 +87,7 @@ cd build-${BUILD_TARGET}-1
     --with-headers=../../${NEWLIB}/newlib/libc/include \
     --enable-languages=c
 make ${PARALLEL}
-make install DESTDIR=${BUILD_TARGET_PATH}
+make install
 
 popd
 
@@ -99,7 +99,7 @@ pushd ${NEWLIB}
 rm -rf build-${BUILD_TARGET}
 mkdir -p build-${BUILD_TARGET}
 cd build-${BUILD_TARGET}
-../configure --prefix=/gcc-toolchain \
+../configure --prefix=${BUILD_TARGET_PATH} \
     --target=${TARGET} \
     --disable-nls \
     --disable-werror \
@@ -110,7 +110,7 @@ cd build-${BUILD_TARGET}
     --enable-interwork \
     --enable-vtable-verify
 make ${PARALLEL}
-make install DESTDIR=${BUILD_TARGET_PATH}
+make install
 
 popd
 
@@ -122,7 +122,7 @@ pushd ${GCC}
 rm -rf build-${BUILD_TARGET}-2
 mkdir -p build-${BUILD_TARGET}-2
 cd build-${BUILD_TARGET}-2
-../configure --prefix=/gcc-toolchain \
+../configure --prefix=${BUILD_TARGET_PATH} \
     --target=${TARGET} \
     --disable-nls \
     --disable-werror \
@@ -141,7 +141,7 @@ cd build-${BUILD_TARGET}-2
     --with-headers=../../${NEWLIB}/newlib/libc/include \
     --enable-languages=c,c++
 make ${PARALLEL}
-make install DESTDIR=${BUILD_TARGET_PATH}
+make install
 
 popd
 
@@ -153,7 +153,7 @@ pushd ${GDB}
 rm -rf build-${BUILD_TARGET}
 mkdir -p build-${BUILD_TARGET}
 cd build-${BUILD_TARGET}
-../configure --prefix=/gcc-toolchain \
+../configure --prefix=${BUILD_TARGET_PATH} \
     --target=${TARGET} \
     --disable-nls \
     --disable-werror \
@@ -173,7 +173,7 @@ cd build-${BUILD_TARGET}
     --with-mpc=${BOOTSTRAP_PATH} \
     --with-isl=${BOOTSTRAP_PATH}
 make ${PARALLEL}
-make install DESTDIR=${BUILD_TARGET_PATH}
+make install
 
 popd
 
