@@ -13,13 +13,15 @@ GDB=${GDB:-gdb-8.0.1}
 NPROC=${NPROC:-$((`nproc`*2))}
 PARALLEL=${PARALLEL:--j${NPROC}}
 
-PATH=/gcc-bootstrap/bin:/gcc-toolchain/bin:$PATH;export PATH
-LD_LIBRARY_PATH=/gcc-bootstrap/lib:/gcc-toolchain/lib:$LD_LIBRARY_PATH;export LD_LIBRARY_PATH
-LD_RUN_PATH=/gcc-bootstrap/lib:/gcc-toolchain/lib:$LD_RUN_PATH;export LD_RUN_PATH
-
 pushd stage
 
+PATH=`pwd`/gcc-bootstrap/bin:`pwd`/gcc-toolchain/bin:$PATH;export PATH
+LD_LIBRARY_PATH=`pwd`/gcc-bootstrap/lib:`pwd`/gcc-toolchain/lib:$LD_LIBRARY_PATH;export LD_LIBRARY_PATH
+LD_RUN_PATH=`pwd`/gcc-bootstrap/lib:`pwd`/gcc-toolchain/lib:$LD_RUN_PATH;export LD_RUN_PATH
+
 BOOTSTRAP_PATH=`pwd`/gcc-bootstrap
+
+echo "BOOTSTRAP_PATH=${BOOTSTRAP_PATH}"
 
 # ==========================================================================
 # cross builds
