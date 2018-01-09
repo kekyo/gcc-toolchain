@@ -15,9 +15,9 @@ PARALLEL=${PARALLEL:--j${NPROC}}
 
 pushd stage
 
-PATH=`pwd`/gcc-bootstrap/bin:`pwd`/gcc-toolchain/bin:$PATH;export PATH
-LD_LIBRARY_PATH=`pwd`/gcc-bootstrap/lib:`pwd`/gcc-toolchain/lib:$LD_LIBRARY_PATH;export LD_LIBRARY_PATH
-LD_RUN_PATH=`pwd`/gcc-bootstrap/lib:`pwd`/gcc-toolchain/lib:$LD_RUN_PATH;export LD_RUN_PATH
+BASE_PATH=`pwd`/gcc-bootstrap/bin:$PATH
+BASE_LD_LIBRARY_PATH=`pwd`/gcc-bootstrap/lib:$LD_LIBRARY_PATH
+BASE_LD_RUN_PATH=`pwd`/gcc-bootstrap/lib:$LD_RUN_PATH
 
 BOOTSTRAP_PATH=`pwd`/gcc-bootstrap
 
@@ -31,6 +31,10 @@ for TARGET in "$@"; do
 BUILD_TARGET=${BUILD}_${TARGET}
 BUILD_TARGET_NAME=build_${BUILD_TARGET}
 BUILD_TARGET_PATH=`pwd`/${BUILD_TARGET_NAME}
+
+PATH=${BUILD_TARGET_PATH}/bin:${BASE_PATH};export PATH
+LD_LIBRARY_PATH=${BUILD_TARGET_PATH}/lib:${BASE_LD_LIBRARY_PATH};export LD_LIBRARY_PATH
+LD_RUN_PATH=${BUILD_TARGET_PATH}/lib:${BASE_LD_RUN_PATH};export LD_RUN_PATH
 
 echo "# ==============================================================="
 echo "# remove last toolchains (for ${BUILD} --> ${TARGET})"
