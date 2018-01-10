@@ -6,6 +6,7 @@ BUILD=${BUILD:-`gcc -dumpmachine`}
 TARGET=${TARGET:-arm-none-eabi}
 
 AUTOCONF=${AUTOCONF:-autoconf-2.64}
+ICONV=${ICONV:-libiconv-1.15}
 NEWLIB=${NEWLIB:-newlib-2.5.0}
 BINUTILS=${BINUTILS:-binutils-2.29.1}
 GCC=${GCC:-gcc-7.2.0}
@@ -24,6 +25,9 @@ pushd artifacts
 
 if [ ! -f ${AUTOCONF}.tar.bz2 ] ; then
     wget http://ftpmirror.gnu.org/autoconf/${AUTOCONF}.tar.bz2
+fi
+if [ ! -f ${ICONV}.tar.gz ] ; then
+    wget http://ftpmirror.gnu.org/libiconv/${ICONV}.tar.gz
 fi
 if [ ! -f ${BINUTILS}.tar.bz2 ] ; then
     wget http://ftpmirror.gnu.org/binutils/${BINUTILS}.tar.bz2
@@ -52,6 +56,10 @@ pushd stage
 if [ ! -d ${AUTOCONF} ] ; then
     echo "Extracting: ${AUTOCONF}"
     tar -jxf ../artifacts/${AUTOCONF}.tar.bz2
+fi
+if [ ! -d ${ICONV} ] ; then
+    echo "Extracting: ${ICONV}"
+    tar -zxf ../artifacts/${ICONV}.tar.gz
 fi
 if [ ! -d ${NEWLIB} ] ; then
     echo "Extracting: ${NEWLIB}"
@@ -132,6 +140,26 @@ ${BOOTSTRAP_PATH}/bin/autoconf
 popd
 
 echo "# ==============================================================="
+echo "# libiconv (bootstrap)"
+
+pushd libiconv*
+
+rm -rf build-bootstrap
+mkdir -p build-bootstrap
+cd build-bootstrap
+../configure --prefix=${BOOTSTRAP_PATH} \
+    --disable-shared \
+    --disable-rpath \
+    --disable-nls \
+    --enable-relocatable \
+    CFLAGS=-static \
+    LDFLAGS=-static
+make ${PARALLEL}
+make install
+
+popd
+
+echo "# ==============================================================="
 echo "# gmp (bootstrap)"
 
 pushd gmp*
@@ -140,7 +168,9 @@ rm -rf build-bootstrap
 mkdir -p build-bootstrap
 cd build-bootstrap
 ../configure --prefix=${BOOTSTRAP_PATH} \
-    --disable-shared
+    --disable-shared \
+    CFLAGS=-static \
+    LDFLAGS=-static
 make ${PARALLEL}
 make install
 make ${PARALLEL} check
@@ -157,7 +187,9 @@ mkdir -p build-bootstrap
 cd build-bootstrap
 ../configure --prefix=${BOOTSTRAP_PATH} \
     --disable-shared \
-    --with-gmp=${BOOTSTRAP_PATH}
+    --with-gmp=${BOOTSTRAP_PATH} \
+    CFLAGS=-static \
+    LDFLAGS=-static
 make ${PARALLEL}
 make install
 make ${PARALLEL} check
@@ -175,7 +207,9 @@ cd build-bootstrap
 ../configure --prefix=${BOOTSTRAP_PATH} \
     --disable-shared \
     --with-gmp=${BOOTSTRAP_PATH} \
-    --with-mpfr=${BOOTSTRAP_PATH}
+    --with-mpfr=${BOOTSTRAP_PATH} \
+    CFLAGS=-static \
+    LDFLAGS=-static
 make ${PARALLEL}
 make install
 make ${PARALLEL} check
@@ -192,7 +226,9 @@ mkdir -p build-bootstrap
 cd build-bootstrap
 ../configure --prefix=${BOOTSTRAP_PATH} \
     --disable-shared \
-    --with-gmp-prefix=${BOOTSTRAP_PATH}
+    --with-gmp-prefix=${BOOTSTRAP_PATH} \
+    CFLAGS=-static \
+    LDFLAGS=-static
 make ${PARALLEL}
 make install
 make ${PARALLEL} check
@@ -208,7 +244,9 @@ rm -rf build-bootstrap
 mkdir -p build-bootstrap
 cd build-bootstrap
 ../configure --prefix=${BOOTSTRAP_PATH} \
-    --disable-shared
+    --disable-shared \
+    CFLAGS=-static \
+    LDFLAGS=-static
 make ${PARALLEL}
 make install
 

@@ -62,7 +62,9 @@ cd build-${BUILD_TARGET}
     --enable-interwork \
     --enable-vtable-verify \
     --with-newlib \
-    --with-isl=${BOOTSTRAP_PATH}
+    --with-isl=${BOOTSTRAP_PATH} \
+    CFLAGS=-static \
+    LDFLAGS=-static
 make ${PARALLEL}
 make install
 make ${PARALLEL} check
@@ -92,7 +94,9 @@ cd build-${BUILD_TARGET}-1
     --with-mpc=${BOOTSTRAP_PATH} \
     --with-isl=${BOOTSTRAP_PATH} \
     --with-headers=../../${NEWLIB}/newlib/libc/include \
-    --enable-languages=c
+    --enable-languages=c \
+    CFLAGS=-static \
+    LDFLAGS=-static
 make ${PARALLEL}
 make install
 
@@ -115,7 +119,9 @@ cd build-${BUILD_TARGET}
     --enable-lto \
     --enable-multilib \
     --enable-interwork \
-    --enable-vtable-verify
+    --enable-vtable-verify \
+    CFLAGS=-static \
+    LDFLAGS=-static
 make ${PARALLEL}
 make install
 
@@ -146,7 +152,9 @@ cd build-${BUILD_TARGET}-2
     --with-mpc=${BOOTSTRAP_PATH} \
     --with-isl=${BOOTSTRAP_PATH} \
     --with-headers=../../${NEWLIB}/newlib/libc/include \
-    --enable-languages=c,c++
+    --enable-languages=c,c++ \
+    CFLAGS=-static \
+    LDFLAGS=-static
 make ${PARALLEL}
 make install
 
@@ -166,7 +174,6 @@ cd build-${BUILD_TARGET}
     --disable-werror \
     --disable-shared \
     --disable-libssp \
-    --disable-libvtv \
     --enable-gold \
     --enable-lto \
     --enable-multilib \
@@ -178,7 +185,9 @@ cd build-${BUILD_TARGET}
     --with-gmp=${BOOTSTRAP_PATH} \
     --with-mpfr=${BOOTSTRAP_PATH} \
     --with-mpc=${BOOTSTRAP_PATH} \
-    --with-isl=${BOOTSTRAP_PATH}
+    --with-isl=${BOOTSTRAP_PATH} \
+    CFLAGS=-static \
+    LDFLAGS=-static
 make ${PARALLEL}
 make install
 
