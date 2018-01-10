@@ -1,5 +1,9 @@
 # gcc cross toolchain builder on MSYS2/MinGW
 
+## Built binaries
+
+* See release page: https://github.com/kekyo/gcc-toolchain/releases
+
 ## Prerequisities
 
 * MSYS2 (http://www.msys2.org/)
