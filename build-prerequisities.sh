@@ -106,7 +106,7 @@ echo "# remove last bootstraps"
 
 pushd stage
 
-BOOTSTRAP_PATH=`pwd`/gcc-bootstrap
+BOOTSTRAP_PATH=`pwd`/${BUILD}/gcc-bootstrap
 rm -rf ${BOOTSTRAP_PATH}
 
 popd
@@ -152,8 +152,9 @@ cd build-bootstrap
     --disable-rpath \
     --disable-nls \
     --enable-relocatable \
-    CFLAGS=-static \
-    LDFLAGS=-static
+    CFLAGS="-O2 -fomit-frame-pointer -static -I${BOOTSTRAP_PATH}/include" \
+    CPPFLAGS="-fexceptions" \
+    LDFLAGS=-"-static -L${BOOTSTRAP_PATH}/lib"
 make ${PARALLEL}
 make install
 
@@ -169,8 +170,9 @@ mkdir -p build-bootstrap
 cd build-bootstrap
 ../configure --prefix=${BOOTSTRAP_PATH} \
     --disable-shared \
-    CFLAGS=-static \
-    LDFLAGS=-static
+    CFLAGS="-O2 -fomit-frame-pointer -static -I${BOOTSTRAP_PATH}/include" \
+    CPPFLAGS="-fexceptions" \
+    LDFLAGS=-"-static -L${BOOTSTRAP_PATH}/lib"
 make ${PARALLEL}
 make install
 make ${PARALLEL} check
@@ -188,8 +190,9 @@ cd build-bootstrap
 ../configure --prefix=${BOOTSTRAP_PATH} \
     --disable-shared \
     --with-gmp=${BOOTSTRAP_PATH} \
-    CFLAGS=-static \
-    LDFLAGS=-static
+    CFLAGS="-O2 -fomit-frame-pointer -static -I${BOOTSTRAP_PATH}/include" \
+    CPPFLAGS="-fexceptions" \
+    LDFLAGS=-"-static -L${BOOTSTRAP_PATH}/lib"
 make ${PARALLEL}
 make install
 make ${PARALLEL} check
@@ -208,8 +211,9 @@ cd build-bootstrap
     --disable-shared \
     --with-gmp=${BOOTSTRAP_PATH} \
     --with-mpfr=${BOOTSTRAP_PATH} \
-    CFLAGS=-static \
-    LDFLAGS=-static
+    CFLAGS="-O2 -fomit-frame-pointer -static -I${BOOTSTRAP_PATH}/include" \
+    CPPFLAGS="-fexceptions" \
+    LDFLAGS=-"-static -L${BOOTSTRAP_PATH}/lib"
 make ${PARALLEL}
 make install
 make ${PARALLEL} check
@@ -227,8 +231,9 @@ cd build-bootstrap
 ../configure --prefix=${BOOTSTRAP_PATH} \
     --disable-shared \
     --with-gmp-prefix=${BOOTSTRAP_PATH} \
-    CFLAGS=-static \
-    LDFLAGS=-static
+    CFLAGS="-O2 -fomit-frame-pointer -static -I${BOOTSTRAP_PATH}/include" \
+    CPPFLAGS="-fexceptions" \
+    LDFLAGS=-"-static -L${BOOTSTRAP_PATH}/lib"
 make ${PARALLEL}
 make install
 make ${PARALLEL} check
@@ -245,8 +250,9 @@ mkdir -p build-bootstrap
 cd build-bootstrap
 ../configure --prefix=${BOOTSTRAP_PATH} \
     --disable-shared \
-    CFLAGS=-static \
-    LDFLAGS=-static
+    CFLAGS="-O2 -fomit-frame-pointer -static -I${BOOTSTRAP_PATH}/include" \
+    CPPFLAGS="-fexceptions" \
+    LDFLAGS=-"-static -L${BOOTSTRAP_PATH}/lib"
 make ${PARALLEL}
 make install
 
