@@ -100,7 +100,7 @@ cd build-${BUILD_TARGET}
     --with-mpfr=${BOOTSTRAP_PATH} \
     --with-mpc=${BOOTSTRAP_PATH} \
     --with-isl=${BOOTSTRAP_PATH} \
-    --without-headers \
+    --with-headers=../../${NEWLIB}/newlib/libc/include \
     --without-ppl \
     --without-cloog \
     --without-gnattools \
